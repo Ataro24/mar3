@@ -44,42 +44,60 @@ class DataManager extends PDO
         return $name;
     }    
    
-    //Databaseに対してクエリを発行する
+    //Databaseに対してクエリを発行する(更新系)
     // @params string $query   
     // @params array  $params  queryに当てはめる変数(プリペアードステートメント利用)
     // @return array           queryの実行結果
     public function exec($query, $params = null)
-    {        
-        if (empty($params) === false) {
-            $ret = $this->_exec_prepare($query, $params);
-        } else {
-            $ret = $this->_exec_normal($query);
-        }
-        return $ret;
+    {
+        return $this->_exec_prepare($query, $params);
     }
-
-    //プリペアードステートメントを利用してクエリ発行
+    //プリペアードステートメントを利用してクエリ発行(更新系)
     // @params string $query
     // @params array  $params
-    // @return array  queryの実行結果
+    // @return int(作用したrow数) or false(失敗時)
     private function _exec_prepare($query, $params)
     {
         $sth = $this->prepare($query);
         foreach ($params as $k => $v) {
             $k = ':' . $k;
-            $sth->bindParam($k, $v, PDO::PARAM_STR);
+            $sth->bindValue($k, $v, PDO::PARAM_STR);
+        }
+        return $sth->execute();
+    }    
+
+    //Databaseに対してクエリを発行する(参照系)
+    // @params string $query   
+    // @params array  $params  queryに当てはめる変数(プリペアードステートメント利用)
+    // @return array           queryの実行結果
+    public function find($query, $params = null)
+    {
+        if (empty($params)) {
+            return $this->_find_normal($query);
+        } else {
+            return $this->_find_prepare($query, $params);
+        }
+    }
+
+    //プリペアードステートメントを利用してクエリ発行(参照系)
+    // @params string $query
+    // @params array  $params
+    // @return array  queryの実行結果
+    private function _find_prepare($query, $params)
+    {
+        $sth = $this->prepare($query);
+        foreach ($params as $k => $v) {
+            $k = ':' . $k;
+            $sth->bindValue($k, $v, PDO::PARAM_STR);
         }
         $result = $sth->execute();
-        if ($result === false) {
-            return array();
-        }
         return $sth->fetchAll();
     }
 
     //クエリの発行
     // @params string $query
     // @return array  queryの実行結果
-    private function _exec_normal($query)
+    private function _find_normal($query)
     {
         return $this->query($query)->fetchAll();
     }
