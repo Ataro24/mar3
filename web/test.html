@@ -1,0 +1,47 @@
+<?php include 'common/head.html'; ?>
+
+<div class="row" style="padding-top:35px;">
+  <div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked" id="myTab">
+      <li class="active"><a href="#add-game" data-toggle="pill">対局結果の追加</a></li>
+      <li><a href="#add-yakuman" data-toggle="pill">役満の追加</a></li>
+      <li><a href="#add-user" data-toggle="pill">対局者の追加</a></li>
+      <li><a href="#display-user" data-toggle="pill">表示メンバーの指定</a></li>
+      <li><a href="#edit-game" data-toggle="pill">対局結果の編集/削除</a></li>
+      <li><a href="#edit-user" data-toggle="pill">対局者の編集/削除</a></li>
+    </ul>
+  </div> <!-- col-md-2 -->
+
+  <div class="col-md-10">
+    <div class="pill-content">
+      <div id="add-game" class="pill-pane">
+	add-game
+      </div>
+      <div id="add-yakuman" class="pill-pane">
+	add-yakuman
+      </div>
+      <div id="add-user" class="pill-pane">
+	add-user
+      </div>
+      <div id="display-user" class="pill-pane">
+	display-user
+      </div>
+      <div id="edit-game" class="pill-pane">
+	edit-game
+      </div>
+      <div id="edit-user" class="pill-pane">
+	edit-user
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    $('#myTab').tab('show')
+  });
+</script>
+
+
+<?php include 'common/foot.html'; ?>
+

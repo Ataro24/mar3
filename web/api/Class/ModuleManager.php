@@ -47,4 +47,5 @@ class ModuleManager
         $name = str_replace(' ', '_', $name);
         return $name;
     }
+
 }

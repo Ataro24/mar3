@@ -1,0 +1,74 @@
+
+* 基本構成
+** ファイル構成
+.
+├── api
+│   ├── Bank
+│   │   └── Users.php //DatabaseやFile操作(対象と1対1対応)
+│   ├── Class //基幹ファイル郡
+│   │   ├── ApiManager.php
+│   │   ├── Bootstrap.php
+│   │   ├── DataManager.php
+│   │   └── ModuleManager.php
+│   │
+│   ├── Module //ロジックとか
+│   │   ├── Fuga.php
+│   │   └── Hoge
+│   │       └── Hoge.php
+│   ├── etc
+│   │   └── db.ini.php //Databaseの設定ファイル
+│   └── top.php
+│         // apiのエントリポイントとか
+│
+│//以下はページと対応
+├── common
+│   ├── foot.html
+│   └── head.html
+├── css
+│   ├── bootstrap-theme.min.css
+│   └── bootstrap.min.css
+├── doc
+│   └── dbs.org
+├── fonts
+├── js
+│   └── vender
+│       ├── bootstrap.min.js
+│       ├── jquery-1.10.2.min.js
+│       └── jsrender.min.js
+└── top.html
+
+** 基本方針
+・apiのエントリポイントでは基本的にModule以下のファイルを読み出すだけで、
+　　jsとのやり取りや、Exceptionなどの管理を行う
+・Module/以下にロジックを記述したファイルを置く．
+　　そしてメソッドはエントリポイント,他のModuleから利用できるように
+・Bank以下にデータベースのテーブルに対応するファイルを置く、
+　　データソースには基本的にこいつだけが触れるようにする
+　　また、Moduleと違いここではデータの読み書き程度の処理に抑える
+　　ファイルとDBへのアクセスも隠蔽できるようになったらいいな
+
+** 命名規則
+apiのエントリポイントにて、
+-------------
+require_once 'Class/Bootstrap.php'
+$hoge = ApiManager::getInstance();
+-------------
+することで、ModuleやBank以下のファイルを扱えるようになる
+エントリポイントには特に命名規則はない
+
+ロジック等を記述するファイルはModule/以下に配置する．
+クラス名は Mar_Module_~ として、ModuleManagerを継承する
+-------------
+class Mar_Module_Hoge_Fuga extends ModuleManager
+-------------
+Mar_Module以下はModule/以下のファイルパスと同じにする
+上の例では、Module/Hoge/Fuga.phpということになる
+
+データベースに直接アクセスできるのはBank/以下のファイルだけであり、
+クラス名は Mar_Bank_~ として、DataManagerを継承する
+-------------
+class Mar_Bank_Users extends ModuleManager
+-------------
+Mar_Bank以下の命名規則はModuleと同様．
+
+

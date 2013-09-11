@@ -1,0 +1,237 @@
+<?php include 'common/head.html'; ?>
+
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="color:#ffffff;">そんなオカルトありえません<small>ver3</small> β</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+	<li><a href="top.html">対局結果</a></li>
+	<li class="active"><a href="config.html">結果追加編集</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+
+<div class="row" style="padding-top:35px;">
+  <div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked" id="myTab">
+      <li class="active"><a href="#add-game" data-toggle="pill">対局結果の追加</a></li>
+      <li><a href="#add-yakuman" data-toggle="pill">役満の追加</a></li>
+      <li><a href="#add-user" data-toggle="pill">対局者の追加</a></li>
+      <li><a href="#display-user" data-toggle="pill">表示メンバーの指定</a></li>
+      <li><a href="#edit-game" data-toggle="pill">対局結果の編集/削除</a></li>
+      <li><a href="#edit-user" data-toggle="pill">対局者の編集/削除</a></li>
+    </ul>
+  </div> <!-- col-md-2 -->
+
+  <div class="col-md-10">
+    <div class="pill-content">
+      <div id="add-game" class="pill-pane">
+	<!-- 対局結果の追加　 -->
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局日</h4>
+	  </div>
+	</div>    
+
+	<div class="row" style="margin:20px">
+	  <div class="col-lg-6">
+	    <select class="form-control" placeholder=".col-lg-4">
+	      <option>2013/09/09</option>
+	      <option>2013/09/10</option>
+	      <option>2013/09/11</option>
+	      <option>2013/09/12</option>
+	      <option>2013/09/13</option>
+	      <option>2013/09/14</option>
+	    </select>
+	  </div>
+	</div>
+
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局者</h4>
+	  </div>
+	</div>    
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-4">
+	    <select class="form-control" placeholder=".col-lg-4">
+	      <option>taro</option>
+	      <option>kuroneko</option>
+	      <option>kirino</option>
+	      <option>kyousuke</option>
+	    </select>
+	  </div>
+	  <div class="col-lg-2">
+	    <select class="form-control" placeholder=".col-lg-2">
+	      <option>1</option>
+	      <option>2</option>
+	      <option>3</option>
+	      <option>4</option>
+	      <option>5</option>
+	    </select>
+	  </div>
+	</div>
+
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-4">
+	    <select class="form-control" placeholder=".col-lg-4">
+	      <option>taro</option>
+	      <option>kuroneko</option>
+	      <option>kirino</option>
+	      <option>kyousuke</option>
+	    </select>
+	  </div>
+	  <div class="col-lg-2">
+	    <select class="form-control" placeholder=".col-lg-2">
+	      <option>1</option>
+	      <option>2</option>
+	      <option>3</option>
+	      <option>4</option>
+	      <option>5</option>
+	    </select>
+	  </div>
+	</div>
+
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-4">
+	    <select class="form-control" placeholder=".col-lg-4">
+	      <option>taro</option>
+	      <option>kuroneko</option>
+	      <option>kirino</option>
+	      <option>kyousuke</option>
+	    </select>
+	  </div>
+	  <div class="col-lg-2">
+	    <select class="form-control" placeholder=".col-lg-2">
+	      <option>1</option>
+	      <option>2</option>
+	      <option>3</option>
+	      <option>4</option>
+	      <option>5</option>
+	    </select>
+	  </div>
+	</div>
+
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-4">
+	    <select class="form-control" placeholder=".col-lg-4">
+	      <option>taro</option>
+	      <option>kuroneko</option>
+	      <option>kirino</option>
+	      <option>kyousuke</option>
+	    </select>
+	  </div>
+	  <div class="col-lg-2">
+	    <select class="form-control" placeholder=".col-lg-2">
+	      <option>1</option>
+	      <option>2</option>
+	      <option>3</option>
+	      <option>4</option>
+	      <option>5</option>
+	    </select>
+	  </div>
+	</div>
+
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-6" style="text-align:center;">
+	    <button type="button" class="btn btn-primary">登録</button>
+	  </div>
+	</div>
+
+      </div>
+      <div id="add-yakuman" class="pill-pane">
+	<!-- 役満の追加 -->
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局日</h4>
+	  </div>
+	</div>
+	<div class="row" style="margin:20px">
+	  <div class="col-lg-6">
+	    <select class="form-control" placeholder=".col-lg-4">
+	      <option>2013/09/09</option>
+	      <option>2013/09/10</option>
+	      <option>2013/09/11</option>
+	      <option>2013/09/12</option>
+	      <option>2013/09/13</option>
+	      <option>2013/09/14</option>
+	    </select>
+	  </div>
+	</div>
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局者/役満</h4>
+	  </div>
+	</div>    
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-4">
+	    <select class="form-control" placeholder=".col-lg-4">
+	      <option>taro</option>
+	      <option>kuroneko</option>
+	      <option>kirino</option>
+	      <option>kyousuke</option>
+	    </select>
+	  </div>
+	  <div class="col-lg-2">
+	    <select class="form-control" placeholder=".col-lg-2">
+	      <option>1</option>
+	      <option>2</option>
+	      <option>3</option>
+	      <option>4</option>
+	      <option>5</option>
+	    </select>
+	  </div>
+	</div>
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-6" style="text-align:center;">
+	    <button type="button" class="btn btn-primary">登録</button>
+	  </div>
+	</div>
+
+      </div>
+      <div id="add-user" class="pill-pane">
+	<!-- 対局者の追加 -->
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局者名</h4>
+	  </div>
+	</div>    
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-6">
+	    <input type="text" class="form-control" placeholder="名前を入力してください">
+	  </div>
+	</div>
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-6" style="text-align:center;">
+	    <button type="button" class="btn btn-primary">登録</button>
+	  </div>
+	</div>
+
+      </div>
+      <div id="display-user" class="pill-pane">
+	<!-- 表示する対局者の設定 -->
+	display-user
+      </div>
+      <div id="edit-game" class="pill-pane">
+	<!-- 対局結果の編集 -->
+	edit-game
+      </div>
+      <div id="edit-user" class="pill-pane">
+	<!-- 対局者の編集 -->
+	edit-user
+      </div>
+    </div>
+  </div><!-- col-md-10 -->
+</div><!-- row -->
+
+<script>
+  $(function(){
+    $('#myTab').tab('show')
+  });
+</script>
+
+
+<?php include 'common/foot.html'; ?>
