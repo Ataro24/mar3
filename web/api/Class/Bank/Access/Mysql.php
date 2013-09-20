@@ -1,6 +1,6 @@
 <?php
-//各Bankはこれを継承すること
-class Mysql extends PDO
+//MySQLを利用するBankはこれを継承すること
+class Class_Bank_Access_Mysql extends PDO
 {
     const BANK_PATH = BANK_PATH;
 
@@ -10,8 +10,6 @@ class Mysql extends PDO
         $ini = include 'db.ini.php';
         $dsn = sprintf("mysql:dbname=%s;host=%s", $ini['dbname'], $ini['host']);
         parent::__construct($dsn, $ini['user'], $ini['password']);
-
-        //@TODO ファイル書き込みもできるようにしたい
     }
 
     //Databaseに対してクエリを発行する(更新系)

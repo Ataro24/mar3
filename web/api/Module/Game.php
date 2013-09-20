@@ -29,24 +29,24 @@ class Mar_Module_Game extends ModuleManager
     }
 
     public function editGame(
-                             $id = null,
-                            $date,
-                            $fstu, $sndu, $thru, $foru,
-                            $fstp, $sndp, $thrp, $forp
-                            )
+        $id = null,
+        $date,
+        $fstu, $sndu, $thru, $foru,
+        $fstp, $sndp, $thrp, $forp
+    )
     {
         $user = array(
-                     'fstu' => $fstu, 
-                     'sndu' => $sndu, 
-                     'thru' => $thru, 
-                     'foru' => $foru,
-                      );
+            'fstu' => $fstu,
+            'sndu' => $sndu,
+            'thru' => $thru,
+            'foru' => $foru,
+        );
         $points = array(
-                        'fstp' => $fstp, 
-                        'sndp' => $sndp, 
-                        'thrp' => $thrp, 
-                        'forp' => $forp
-                        );
+            'fstp' => $fstp,
+            'sndp' => $sndp,
+            'thrp' => $thrp,
+            'forp' => $forp
+        );
         foreach ($user as $u) {
             $this->_v->validate('user_uid', array('uid' => $u));
         }
@@ -54,25 +54,25 @@ class Mar_Module_Game extends ModuleManager
         if (empty($id)) {
             //idがないので新規登録
             $ret = $this->_games->addGame(
-                                          $date,
-                                          $fstu, $sndu, $thru, $foru,
-                                          $fstp, $sndp, $thrp, $forp
-                                          );
+                $date,
+                $fstu, $sndu, $thru, $foru,
+                $fstp, $sndp, $thrp, $forp
+            );
         } else {
             //idがあるので編集
             $ret = $this->_games->updateGame(
-                                             $id,
-                                             $date,
-                                             $fstu, $sndu, $thru, $foru,
-                                             $fstp, $sndp, $thrp, $forp
-                                             );
+                $id,
+                $date,
+                $fstu, $sndu, $thru, $foru,
+                $fstp, $sndp, $thrp, $forp
+            );
         }
 
         if ($ret === false) {
             throw new Exception (
-                                 'Can not add Game',
-                                 100
-                                 );
+                'Can not add Game',
+                100
+            );
         }
         return true;
     }
@@ -82,9 +82,9 @@ class Mar_Module_Game extends ModuleManager
         $ret = $this->_games->deleteGame($id);
         if ($ret === false) {
             throw new Exceptoin (
-                                 'Can not delete Game',
-                                 100
-                                 );
+                'Can not delete Game',
+                100
+            );
         }
         return true;
     }

@@ -1,7 +1,7 @@
 <?php
 /* require_once 'Class/Module_Base.php'; */
 /* $m = Module_Base::getInstance(); */
-
+ 
 /* var_dump($m); */
 /* var_dump($m->db->hoge); */
 
@@ -44,14 +44,8 @@ $m = ApiManager::getInstance();
 
 //$m->returnApi($ret);
 
-/* $c = $m->loadModule('calc_manager'); */
-/* $c->calcurateGames(); */
-
-$c = $m->loadModule('fuga');
-$c->test();
-var_dump($c);
-//var_dump($c->users);
-
+$c = $m->loadModule('calc_manager');
+$c->calcurateGames();
 
 
 

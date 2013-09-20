@@ -8,8 +8,8 @@ class Mar_Module_User extends ModuleManager
     public function __construct()
     {
         parent::__construct();
-        $this->_v = $this->load('validator');
-        $this->_users = $this->getDataManager('users');        
+        //        $this->_v = $this->load('validator');
+        //        $this->_users = $this->getDataManager('users');
     }
 
     public function getUserList()
@@ -52,5 +52,5 @@ class Mar_Module_User extends ModuleManager
         return true;
     }
 
-    
+
 }

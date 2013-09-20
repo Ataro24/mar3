@@ -71,6 +71,4 @@ class Mar_Bank_Users extends DataManager
         $ret = $this->exec($this->_querys['find_by_id'], $params);
         var_dump($ret);
     }
-        
-
 }
