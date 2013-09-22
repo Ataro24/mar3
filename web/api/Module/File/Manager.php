@@ -40,7 +40,6 @@ class Mar_Module_File_Manager extends ModuleManager
         /* fwrite($fp, $html); */
         /* fclose($fp); */
         $this->writeFile(self::RESULT_TOP, $this->gametable->makeGameListTable($user_list, $game_list, array()));//$this->makeHtml($user_list, $game_list, $calc_list));
-
     }
 
     public function writeTop($user_list, $game_list, $calc_list)

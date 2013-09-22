@@ -1,6 +1,14 @@
 <?php
 class Mar_Module_Game extends ModuleManager
 {
+    public $modules = array();
+    public $banks   = array();
+    /*
+      データソースがファイルになったので、
+      uid管理ではなく、nameですべて管理することになる
+     */
+
+
     private $_v;
     private $_games;
 

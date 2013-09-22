@@ -55,4 +55,27 @@ class Class_Bank_Access_File
         fclose($fp);
         return true;
     }
+
+    //fileの末尾に追記する
+    //@params array @str_array  1行ごとに配列に格納されている
+    public function writeTail($str_array)
+    {
+        if (empty($this->_file_path)) {
+            return false;
+        }
+        if (($fp = fopen($this->_file_path, "a")) === false) {
+            return false;
+        }
+                //改行を末尾に取り付ける
+        $ret = '';
+        foreach ($str_array as $k => $v) {
+            $str_array[$k] = $v . "\n";
+            $ret = $ret . $str_array[$k];
+        }
+        if (fwrite($fp, $ret) === false) {
+            return false;
+        }
+        fclose($fp);
+        return true;
+    }
 }
