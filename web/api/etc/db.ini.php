@@ -1,8 +1,8 @@
 <?php
 //Databaseの設定ファイル
 return array(
-             'dbname'   => 'mar',
-             'host'     => 'localhost',
-             'user'     => 'tatsu',
-             'password' => 'tatsudb',
+             'dbname'   => 'database',
+             'host'     => 'host',
+             'user'     => 'yourname',
+             'password' => 'yourpass',
 );

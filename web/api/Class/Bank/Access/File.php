@@ -58,6 +58,10 @@ class Class_Bank_Access_File
 
     //fileの末尾に追記する
     //@params array @str_array  1行ごとに配列に格納されている
+    //                          ex. array(
+    //                                    0 => "hoge hoge hoge",
+    //                                    1 => "fuga fuga fuga"
+    //                                   )
     public function writeTail($str_array)
     {
         if (empty($this->_file_path)) {
