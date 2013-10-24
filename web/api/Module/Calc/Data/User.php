@@ -62,7 +62,7 @@ class Mar_Module_Calc_Data_User
     //平均順位を求める
     public function makeAvgOrder()
     {
-        if (empty($this->avg_order) === false) {
+        if (empty($this->order) === false) {
             $this->avg_order = array_sum($this->order)/count($this->order);
         } else {
             $this->avg_order = 0;
@@ -104,6 +104,11 @@ class Mar_Module_Calc_Data_User
                 }
             }
         }
+    }
+
+    public function getUid()
+    {
+        return $this->uid;
     }
 
     //累計得点を取り出す

@@ -1,6 +1,8 @@
 <?php
 class Mar_Module_HtmlMaker_Game_Table
 {
+    //TODO テーブル生成の効率化
+
     const TABLE_FORMAT = '<table %s><thead %s>%s</thead><tbody %s>%s</tbody></table>';
     const TR_FORMAT = '<tr %s>%s</tr>';
     const TD_FORMAT = '<td %s>%s</td>';
@@ -9,6 +11,7 @@ class Mar_Module_HtmlMaker_Game_Table
     const USER_ID_FORMAT = 'user_';
 
     //対局結果一覧の表をつくる
+    // $params テーブルのidなどの指定
     public function makeGameListTable($user_list, $game_list, $params)
     {
         $thead = $this->makeGameListThead($user_list);
@@ -21,6 +24,77 @@ class Mar_Module_HtmlMaker_Game_Table
         $html = $this->exportTable($thead, $tbody, $params);
         return $html;
     }
+
+    //総合成績テーブル
+    public function makeScoreListTable($user_list, $calc_list, $paramas)
+    {
+        $thead = $this->makeScoreListThead($user_list);
+        $tbody = $this->makeScoreListTbody($user_list, $calc_list);
+        $params = array(
+                        'table' => array(
+                                         'class' => 'table'
+                                         )
+                        );
+        $html = $this->exportTable($thead, $tbody, $params);
+        return $html;
+    }
+
+    public function makeScoreListThead($user_list)
+    {
+        $body = '';
+        $body = $body . sprintf(self::TH_FORMAT,
+                                '',
+                                'ALL'
+                                );
+        foreach ($user_list as $uid => $name) {
+            $uid_str = sprintf('id="%s"', self::USER_ID_FORMAT . $uid);
+            $body = $body . sprintf(self::TH_FORMAT,
+                                    $uid_str,
+                                    $name
+                                    );
+        }
+        $body = sprintf(self::TR_FORMAT,
+                        '',
+                        $body
+                        );
+        return $body;
+    }
+
+    public function makeScoreListTbody($user_list, $calc_list)
+    {
+        //得点
+        $point_line = '';
+        $point_line = $point_line . sprintf(self::TD_FORMAT,
+                                            '',
+                                            'point'
+                                            );
+        foreach ($calc_list as $user) {
+            $uid_str = sprintf('id="%s"', self::USER_ID_FORMAT. $user->getUid());
+            $point_line = $point_line . sprintf(self::TD_FORMAT,
+                                                $uid_str,
+                                                $user->getSumPoint()
+                                                );
+        }
+        $point_line = sprintf(self::TR_FORMAT,
+                              '',
+                              $point_line);
+        //平均順位
+        $order_line = '';
+        $order_line = $order_line . sprintf(self::TD_FORMAT,
+                                            '',
+                                            'order'
+                                            );
+        foreach ($calc_list as $user) {
+            $uid_str = sprintf('id="%s"', self::USER_ID_FORMAT. $user->getUid());
+            $order_line = $order_line . sprintf(self::TD_FORMAT,
+                                                $uid_str,
+                                                sprintf("%.2f", $user->getAvgOrder())
+                                                );
+        }
+        $order_line = sprintf(self::TR_FORMAT, '', $order_line);
+        return $point_line . "\n" . $order_line;
+    }
+
 
     //対局結果一覧の表のうちのヘッダをつくる
     public function makeGameListThead($user_list)
@@ -97,7 +171,6 @@ class Mar_Module_HtmlMaker_Game_Table
     //tableの形を出力する
     public function exportTable($thead, $tbody, $params)
     {
-        $table_extention = empty($params['table'])?array():$params['table'];
         $ret = sprintf(self::TABLE_FORMAT,
                        $this->transExtentionParams(empty($params['table'])?array():$params['table']),
                        $this->transExtentionParams(empty($params['thead'])?array():$params['thead']),

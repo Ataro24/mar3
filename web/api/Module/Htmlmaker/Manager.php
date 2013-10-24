@@ -14,6 +14,8 @@ class Mar_Module_Htmlmaker_Manager extends ModuleManager
     //各ユーザの成績
     const RESULT_EACH_USER = 'result_each_user.html;';
 
+    const VIEW_TOP_PAGE_GAME_RESULT = 30;
+
     private $gametable;
 
     public function __construct()
@@ -33,8 +35,35 @@ class Mar_Module_Htmlmaker_Manager extends ModuleManager
 
     public function writeFileAll($user_list, $game_list, $calc_list)
     {
-        $this->writeFile(self::RESULT_TOP, $this->gametable->makeGameListTable($user_list, $game_list, array()));//$this->makeHtml($user_list, $game_list, $calc_list));
+        echo "writeFileAll\n";
+        // topページ用
+        $this->writeTopPage($user_list, $game_list, $calc_list);
+
+
     }
+
+    public function writeTopPage($user_list, $game_list, $calc_list)
+    {
+        //メインのテーブル(直近30局になるように)
+        if (count($game_list) > self::VIEW_TOP_PAGE_GAME_RESULT) {
+            $game_list_chomp = array();
+            $c = 1;
+            foreach ($game_list as $g) {
+                $game_list_chomp[] = $g;
+                $c += 1;
+                if ($c > self::VIEW_TOP_PAGE_GAME_RESULT) {
+                    break;
+                }
+            }
+            $game_list = $game_list_chomp;
+        }
+        $main_table_html = $this->gametable->makeGameListTable($user_list, $game_list, array());
+        //総合成績テーブル
+        $score_table_html = $this->gametable->makeScoreListTable($user_list, $calc_list, array());
+        $top_page_html = $main_table_html . "\n" . $score_table_html;
+        $this->writeFile(self::RESULT_TOP, $top_page_html);
+    }
+
 
     public function writeTop($user_list, $game_list, $calc_list)
     {
