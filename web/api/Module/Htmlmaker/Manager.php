@@ -33,12 +33,6 @@ class Mar_Module_Htmlmaker_Manager extends ModuleManager
 
     public function writeFileAll($user_list, $game_list, $calc_list)
     {
-        /* $file_path =SERVICE_BASE . '/' . self::RESUL CalcT_TOP;  */
-        /* var_dump($file_path); */
-        /* $fp = fopen($file_path, 'w'); */
-        /* $html = $this->makeHtml($user_list, $game_list, $calc_list); */
-        /* fwrite($fp, $html); */
-        /* fclose($fp); */
         $this->writeFile(self::RESULT_TOP, $this->gametable->makeGameListTable($user_list, $game_list, array()));//$this->makeHtml($user_list, $game_list, $calc_list));
     }
 
