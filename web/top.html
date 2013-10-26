@@ -1,0 +1,27 @@
+<?php include 'common/head.html'; ?>
+
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="color:#ffffff;">そんなオカルトありえません<small>ver3</small> β</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+	<li class="active"><a href="top.html">対局結果</a></li>
+	<li><a href="config.html">結果追加編集</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<?php
+  if (file_exists('result_top.html') === true) {
+    include 'result_top.html';
+  }
+?>
+
+
+
+
+
+<?php include 'common/foot.html'; ?>

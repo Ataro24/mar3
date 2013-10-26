@@ -3,11 +3,23 @@
 class ModuleManager
 {
     const MODULE_PATH = MODULE_PATH;
+    public $modules = array();    //利用したいmodule一覧
+    public $banks   = array();  //利用したいBank一覧
     private $_db;
-    
+
     public function __construct()
     {
-        $this->_db = new DataManager();
+        $this->_db = new BankManager();
+        if (empty($this->modules) === false) {
+            foreach ($this->modules as $m) {
+                $this->$m = $this->load($m);//Moduleを呼び出す
+            }
+        }
+        if (empty($this->banks) === false) {
+            foreach ($this->banks as $b) {
+                $this->$b = $this->loadBank($b);//Bankを呼び出す
+            }
+        }
     }
 
     //$classで指定されたModuleを呼び出す
@@ -32,9 +44,9 @@ class ModuleManager
     //DataBaseやFileへのアクセスマネージャの取得
     // @param  string $class  Bank以下のクラスを呼び出す
     // @return obj            指定されたクラスオブジェクト
-    public function getDataManager($class)
+    public function loadBank($class)
     {
-        return $this->_db->makeBank($class);
+        return $this->_db->loadBank($class);
     }
 
     //hoge_hoge を Hoge_Hogeに変換する
@@ -47,4 +59,5 @@ class ModuleManager
         $name = str_replace(' ', '_', $name);
         return $name;
     }
+
 }

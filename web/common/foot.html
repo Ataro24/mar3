@@ -1,0 +1,31 @@
+   </div> <!-- container -->
+  </body>
+</html>
+
+<script id="tpl_date_list" type="text/x-jsrender">
+  <option value="{{>#data}}">{{>#data}}</option>
+</script>
+
+<script id="tpl_all_user_list" type="text/x-jsrender">
+  <option id="uid_{{>#index}}">{{>#data}}</option>
+</script>
+
+<script id="tpl_numbers" type="text/x-jsrender">
+  {{if #data==0}}
+  <option value="{{>#data}}" selected>{{>#data}}</option>
+  {{else}}
+  <option value="{{>#data}}">{{>#data}}</option>
+  {{/if}}
+</script>
+
+<script id="tpl_user_selector" type="text/x-jsrender">
+    <div class="col-lg-4">
+      <select class="form-control user_name_list" placeholder=".col-lg-4">
+	<!-- <script id="tpl_all_user_list" type="text/x-jsrender"> -->
+      </select>
+    </div>
+    <div class="col-lg-2">
+      <select class="form-control user_point_num" placeholder=".col-lg-2">
+	<!-- <script id="tpl_numbers" type="text/x-jsrender"> -->
+      </select>
+</script>

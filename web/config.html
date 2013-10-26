@@ -1,0 +1,157 @@
+<?php include 'common/head.html'; ?>
+
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" style="color:#ffffff;">そんなオカルトありえません<small>ver3</small> β</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+	<li><a href="top.html">対局結果</a></li>
+	<li class="active"><a href="config.html">結果追加編集</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+
+<div class="row" style="padding-top:35px;">
+  <div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked" id="myTab">
+      <li class="active"><a href="#add-game" data-toggle="pill">対局結果の追加</a></li>
+      <li><a href="#add-yakuman" data-toggle="pill">役満の追加</a></li>
+      <li><a href="#add-user" data-toggle="pill">対局者の追加</a></li>
+      <li><a href="#display-user" data-toggle="pill">表示メンバーの指定</a></li>
+      <li><a href="#edit-game" data-toggle="pill">対局結果の編集/削除</a></li>
+      <li><a href="#edit-user" data-toggle="pill">対局者の編集/削除</a></li>
+    </ul>
+  </div> <!-- col-md-2 -->
+
+  <div class="col-md-10">
+    <div class="pill-content">
+
+      <div id="add-game" class="pill-pane">
+	<!-- 対局結果の追加　 -->
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局日</h4>
+	  </div>
+	</div>
+	<div class="row" style="margin:20px">
+	  <div class="col-lg-6">
+	    <select id="add_game_date_selector" class="form-control date_selector" placeholder=".col-lg-4">
+	      <!-- <script id="tpl_date_list" type="text/x-jsrender"> -->
+	    </select>
+	  </div>
+	</div>
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局者</h4>
+	  </div>
+	</div>
+	<div id="player_1" class="row user_selector" style="margin:20px;"></div>
+	<div id="player_2" class="row user_selector" style="margin:20px;"></div>
+	<div id="player_3" class="row user_selector" style="margin:20px;"></div>
+	<div id="player_4" class="row user_selector" style="margin:20px;"></div>
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-6" style="text-align:center;">
+	    <button id="send_game_info" type="button" class="btn btn-primary enable">登録</button>
+	  </div>
+	</div>
+      </div>
+
+      <div id="add-yakuman" class="pill-pane">
+	<!-- 役満の追加 -->
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局日</h4>
+	  </div>
+	</div>
+	<div class="row" style="margin:20px">
+	  <div class="col-lg-6">
+	    <select id="add_yakuman_date_selector" class="form-control date_selector" placeholder=".col-lg-4">
+	      <!-- <script id="tpl_date_list" type="text/x-jsrender"> -->
+	    </select>
+	  </div>
+	</div>
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局者/役満</h4>
+	  </div>
+	</div>    
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-4">
+	    <select id="add_yakuman_player_name" class="form-control user_name_list" placeholder=".col-lg-4">
+	      <!-- <script id="tpl_all_user_list" type="text/x-jsrender"> -->
+	    </select>
+	  </div>
+	  <div class="col-lg-2">
+	    <select id="yakuman_list" class="form-control" placeholder=".col-lg-2">
+              <option>大三元</option>
+              <option>四暗刻</option>
+              <option>国士無双</option>
+              <option>字一色</option>
+              <option>緑一色</option>
+              <option>清老頭</option>
+              <option>四喜和</option>
+              <option>九蓮宝燈</option>
+              <option>四槓子</option>
+              <option>天和</option>
+              <option>地和</option>
+	    </select>
+	  </div>
+	</div>
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-6" style="text-align:center;">
+	    <button id="send_yakuman_info" type="button" class="btn btn-primary enable">登録</button>
+	  </div>
+	</div>
+
+      </div>
+      <div id="add-user" class="pill-pane">
+	<!-- 対局者の追加 -->
+	<div class="row" style="margin-left:20px;">
+	  <div class="col-lg-6">
+	    <h4>対局者名</h4>
+	  </div>
+	</div>
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-6">
+	    <input id="new_player_name_input_field" type="text" class="form-control" placeholder="名前を入力してください">
+	  </div>
+	</div>
+	<div class="row" style="margin:20px;">
+	  <div class="col-lg-6" style="text-align:center;">
+	    <button id="send_new_player_name" type="button" class="btn btn-primary enable">登録</button>
+	  </div>
+	</div>
+
+      </div>
+      <div id="display-user" class="pill-pane">
+	<!-- 表示する対局者の設定 -->
+	display-user
+      </div>
+      <div id="edit-game" class="pill-pane">
+	<!-- 対局結果の編集 -->
+	edit-game
+      </div>
+      <div id="edit-user" class="pill-pane">
+	<!-- 対局者の編集 -->
+	edit-user
+      </div>
+    </div>
+  </div><!-- col-md-10 -->
+</div><!-- row -->
+
+<script>
+  $(function(){
+    $('#myTab').tab('show')
+  });
+</script>
+
+
+<div id="hoge">
+</div>
+
+
+<?php include 'common/foot.html'; ?>
