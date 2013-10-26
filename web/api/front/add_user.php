@@ -5,15 +5,23 @@ $m = ApiManager::getInstance();
 
 $user_data = $m->getAjaxData();
 
-error_log(print_r($user_data, true));
+$users = $m->loadModule('users');
 
-/* $users = $m->loadModule('user'); */
+try {
 
-/* try { */
-/*     $ret = $users->addUser($uname); */
-    
-/* } catch (Exception $e) { */
+    if (isset($user_data['name'])) {
+        $ret = $users->addUser($user_data['name']);
+    } else {
+        throw new Exception (
+            'Invalid Data',
+            100
+        );
+    }
 
-/* } */
+} catch (Exception $e) {
 
-/* $m->returnApi($ret); */
+    $ret = $e;
+
+}
+
+$m->returnApi($ret);

@@ -66,6 +66,7 @@ class Mar_Module_Games extends ModuleManager
     private function _checkGameInfo($game_info)
     {
         $this->_checkUserExist($game_info);
+        $this->_checkDoubleName($game_info);
         $this->_checkSumGameResult($game_info);
     }
 
@@ -77,6 +78,12 @@ class Mar_Module_Games extends ModuleManager
             if ($k === 'date') {
                 continue;
             }
+            if (isset($u['name']) === false) {
+                throw new Exception(
+                    'Unvaliable Info',
+                    100
+                );
+            }
             if ($ret = $this->users->isUserExist($u['name']) === false) {
                 //対局したユーザが登録されていない
                 throw new Exception(
@@ -84,7 +91,27 @@ class Mar_Module_Games extends ModuleManager
                                     100
                                     );
             }
-            
+        }
+        return true;
+    }
+
+    //対局情報に同じ名前のユーザいないか調べる
+    // @parms $game_info array jsから送られてきたデータ構造
+    private function _checkDoubleName($game_info)
+    {
+        $name_list = array();
+        foreach($game_info as $key => $info) {
+            if ($key != 'date') {
+                error_log(print_r($info,true));
+                if (array_key_exists($info['name'], $name_list) == false) {
+                    $name_list[$info['name']] = $info['name'];
+                } else {
+                    throw new Exception(
+                        'Double Count User',
+                        100
+                    );
+                }
+            }
         }
         return true;
     }
@@ -110,7 +137,7 @@ class Mar_Module_Games extends ModuleManager
     }
 
     // jsから送られてきたデータのデータ構造(順位は考えていない)
-    // $game_info = 
+    // $game_info =
     //   array(
     //      'date'  => "2013-09-28",
     //      1 => array(
@@ -124,7 +151,7 @@ class Mar_Module_Games extends ModuleManager
     //       ...
     //       )
     // を順番を考慮して並べ替えて
-    // array( 
+    // array(
     //       'date' => '2013-09-28',
     //       'fstu' => 'taro',
     //       'sndu' => 'jiro', ...) の形に変換する//この形になっているデータは確かなものとして扱う

@@ -36,7 +36,7 @@ class Mar_Module_Users extends ModuleManager
 
     //ユーザ名$nameを$new_nameに更新する
     // @params $name       string  old name
-    // @params $new_name   string  new name   
+    // @params $new_name   string  new name
     public function editUserName($name, $new_name)
     {
         if (($this->isUserExist($name) === false) 

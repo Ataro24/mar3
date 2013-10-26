@@ -5,13 +5,12 @@ $m = ApiManager::getInstance();
 
 $game_info = $m->getAjaxData();
 
-/* $game = $m->loadModule('game'); */
+$games = $m->loadModule('games');
 
-/* try { */
-/*     $ret = $users->addGame($uname); */
-    
-/* } catch (Exception $e) { */
+try {
+    $ret = $games->addGameResult($game_info);
+} catch (Exception $e) {
+    $ret = array($e);
+}
 
-/* } */
-
-/* $m->returnApi($ret); */
+$m->returnApi($ret);

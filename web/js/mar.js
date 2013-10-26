@@ -13,7 +13,7 @@ $(function(){
 	Mar.Engine = function() {
 	    var self = this;
 	};
-	
+
 	Mar.Engine.prototype = {
 	    time_range:15,
 	    point_range:160,
@@ -30,7 +30,7 @@ $(function(){
 		var d = now.getDate();
 		var j = 0;
 		for (var i=0; i<(date_list.length); i++) {
-		    var date = computeDate(y, m, d, j)
+		    var date = computeDate(y, m, d, j);
 		    date_list[i] = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
 		    j--;
 		}
@@ -62,7 +62,7 @@ $(function(){
 	    getSelectedDate: function(){
 		return $('#add_game_date_selector').val();
 	    },
-	    sendData: function(api, data){
+	    sendData: function(api, data, complete_callback){
 		$.ajax({
 		    type: "POST",
 		    cache: false,
@@ -70,6 +70,7 @@ $(function(){
 		    data: JSON.stringify(data),
 		    success: function(data, status, xhr) {
 			console.log('success');
+              complete_callback();
 		    },
 		    error: function(xhr, status, errorThrow) {
 			console.log('error');
@@ -90,7 +91,7 @@ $(function(){
 		    url: "api/front/get_user.php",
 		    data: {},
 		    success: function(data, status, xhr) {
-			console.log('success');		
+			console.log('success');
 			Mar.user_list = data;
 			self.renderUserSelector();
 			self.renderDateSelector();
@@ -152,30 +153,48 @@ $(function(){
 		var self = this;
 		//対局結果の送信
 		$("#send_game_info").click(function(){
+          if ($(this).hasClass('enable')) {
+            $(this).removeClass('enable');
 		    var game_info = {
-			date: self.getSelectedDate(),
-			1: self.getSelectedGameResult(1),
-			2: self.getSelectedGameResult(2),
-			3: self.getSelectedGameResult(3),
-			4: self.getSelectedGameResult(4)
+			  date: self.getSelectedDate(),
+			  1: self.getSelectedGameResult(1),
+			  2: self.getSelectedGameResult(2),
+			  3: self.getSelectedGameResult(3),
+			  4: self.getSelectedGameResult(4)
 		    };
-		    self.sendData('api/front/edit_game.php', game_info);
+            var complete_callback = function(){
+              $("#send_game_info").addClass('enable');
+            };
+		    self.sendData('api/front/edit_game.php', game_info, complete_callback);
+          }
 		});
 		//対局者の追加
 		$("#send_new_player_name").click(function(){
+          if ($(this).hasClass('enable')) {
+            $(this).removeClass('enable');
 		    var name = $("#new_player_name_input_field").val();
-		    self.sendData('api/front/add_user.php', {name:name});
+            var complete_callback = function(){
+              $("#send_new_player_name").addClass('enable');
+            };
+		    self.sendData('api/front/add_user.php', {name:name}, complete_callback);
+          }
 		});
 		//役満履歴の追加
-		$("#send_yakuman_info").click(function(){
-		    var name = $("#add_yakuman_player_name").val();
-		    var yakuman = $("#yakuman_list").val();
-		    var yakuman_info = {
-			date: $('#add_yakuman_date_selector').val(),
-			name: name,
-			yaku: yakuman
-		    };
-		    self.sendData('api/front/edit_yakuman.php', yakuman_info);
+		  $("#send_yakuman_info").click(function(){
+            if ($(this).hasClass('enable')) {
+              $(this).removeClass('enable');
+		      var name = $("#add_yakuman_player_name").val();
+		      var yakuman = $("#yakuman_list").val();
+		      var yakuman_info = {
+			    date: $('#add_yakuman_date_selector').val(),
+			    name: name,
+			    yaku: yakuman
+		      };
+              var complete_callback = function(){
+                $("#send_yakuman_info").addClass('enable');
+              };
+		      self.sendData('api/front/edit_yakuman.php', yakuman_info, complete_callback);
+            }
 		});
 
 	    },

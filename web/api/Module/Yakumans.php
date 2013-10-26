@@ -30,6 +30,7 @@ class Mar_Module_Yakumans extends ModuleManager
 
     public function addYakuman($yakuman_info)
     {
+        $this->_checkYakumanInfo($yakuman_info);
         $this->_checkYakuman($yakuman_info["yaku"]);
         $this->_checkUserExist($yakuman_info["name"]);
         $ret = $this->file_yakumans->addYakuman($yakuman_info);
@@ -68,6 +69,28 @@ class Mar_Module_Yakumans extends ModuleManager
         return true;
     }
 
+
+    private function _checkYakumanInfo($yakuman_info)
+    {
+        if (isset($yakuman_info['date']) === false) {
+            throw new Exception(
+                'Invalid Data',
+                100
+            );
+        }
+        if (isset($yakuman_info['name']) === false) {
+            throw new Exception(
+                'Invalid Data',
+                100
+            );
+        }
+        if (isset($yakuman_info['yaku']) === false) {
+            throw new Exception(
+                'Invalid Data',
+                100
+            );
+        }
+    }
 
     private function _checkUserExist($name)
     {

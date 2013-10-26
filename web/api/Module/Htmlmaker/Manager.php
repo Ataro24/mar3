@@ -46,17 +46,15 @@ class Mar_Module_Htmlmaker_Manager extends ModuleManager
     {
         //メインのテーブル(直近30局になるように)
         if (count($game_list) > self::VIEW_TOP_PAGE_GAME_RESULT) {
+            $list_num = count($game_list);
             $game_list_chomp = array();
-            $c = 1;
-            foreach ($game_list as $g) {
-                $game_list_chomp[] = $g;
-                $c += 1;
-                if ($c > self::VIEW_TOP_PAGE_GAME_RESULT) {
-                    break;
-                }
+            $start = $list_num - self::VIEW_TOP_PAGE_GAME_RESULT;
+            for ($i = $start; $i < $list_num; $i++) {
+                $game_list_chomp[] = $game_list[$i];
             }
             $game_list = $game_list_chomp;
         }
+
         $main_table_html = $this->gametable->makeGameListTable($user_list, $game_list, array());
         //総合成績テーブル
         $score_table_html = $this->gametable->makeScoreListTable($user_list, $calc_list, array());
